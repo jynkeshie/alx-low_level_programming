@@ -13,16 +13,17 @@ int main(void)
 		for (d = b + 1; d <= 8; d++)
 		{
 			for (f = d + 1; f <= 9; f++)
+			{
+				putchar(b + '0');
+				putchar(d + '0');
+				putchar(f + '0');
+
+				if (b != 7 || d != 8)
 				{
-					putchar(b + '0');
-					putchar(d + '0');
-					putchar(f + '0');
-					if (b != 7 || d != 8)
-					{
-						putchar(',');
-						putchar(' ');
-					}
+					putchar(',');
+					putchar(' ');
 				}
+			}
 		}
 	}
 	putchar('\n');
