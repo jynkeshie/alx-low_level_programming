@@ -6,9 +6,9 @@
  * Return: 1 for upper letter or 0 otherwise
  */
 
-int_isupper(int x)
+int_isupper(int y)
 {
-	if (x >= 65 && x <= 90)
+	if (y >= 'A' && y <= 'z')
 	{
 		return (1);
 	}
