@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stddef.h>
 
 /**
  * rev_string - reverse array
@@ -11,17 +12,18 @@ void rev_string(char *n)
 	int j = 0;
 	char temp;
 
-	while (*(n + 1) != '\0')
+	while (*(n) != '\0')
 	{
 		i++;
+		n++;
 	}
 	i--;
 
 	for (j = 0; j < i; j++, i--)
 	{
-		temp = *(n + j);
-		*(n + j) = *(n + i);
-		*(n + i) = temp;
+		temp = *(n - j - 1);
+		*(n - j - 1) = *(n - i - 1);
+		*(n - i - 1) = temp;
 	}
 }
 
@@ -46,8 +48,8 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 		i--;
 		j--;
 
-		if (j > size_r || i >= size_r)
-			return (0);
+		if (j > size_r || i >= size_r - 1)
+			return NULL;
 
 		while (j >= 0 || i >= 0 || overflow == 1)
 		{
@@ -59,14 +61,18 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 				val2 = 0;
 			else
 				val2 = *(n2 + j) - '0';
+			
 			temp_tot = val1 + val2 + overflow;
+			if (overflow == 1)
+			{
+				temp_tot -= 10;
+				overflow = 0;
+			}
 			if (temp_tot >= 10)
 				overflow = 1;
-			else
-				overflow = 0;
 
-			if (digits >= (size_r - 1))
-				return (0);
+			if (digits >= size_r - 1)
+				return NULL;
 
 			*(r + digits) = (temp_tot % 10) + '0';
 			digits++;
@@ -74,8 +80,8 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 			i--;
 		}
 
-		if (digits == size_r - 1)
-			return (0);
+		if (digits >= size_r - 1)
+			return NULL;
 
 		*(r + digits) = '\0';
 		rev_string(r);
