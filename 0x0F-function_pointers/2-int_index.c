@@ -1,33 +1,24 @@
 #include "function_pointers.h"
-#include <stdio.h>
 
 /**
- * int_index - Iterates over array elements applying 'cmp'.
- * Returns index of first non-zero return of 'cmp', or -1 otherwise.
- *
- * @array: The integer array to be iterated over.
- * @size: Size of the array.
- * @cmp: A function pointer applied to each element in array.
- *
- * Return: index of the first non-zero return of 'cmp', or
- * -1 if no such index is found or array size is <= 0.
+ * int_index - return index place if comparison = true, else -1
+ * @array: array
+ * @size: size of elements in array
+ * @cmp: pointer to func of one of the 3 in main
+ * Return: 0
  */
 
 int int_index(int *array, int size, int (*cmp)(int))
 {
-	int index;
+	int i;
 
-	if (size <= 0)
-	{
+	if (array == NULL || size <= 0 || cmp == NULL)
 		return (-1);
-	}
-	for (index = 0; index < size; index++)
-	{
-		if (cmp(array[index]))
-		{
-			return (index);
-		}
-	}
 
+	for (i = 0; i < size; i++)
+	{
+		if (cmp(array[i]))
+				return (i);
+	}
 	return (-1);
 }
